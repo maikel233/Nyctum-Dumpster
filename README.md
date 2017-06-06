@@ -1,3 +1,6 @@
+# Detected
+The cheat is detected and needs some pCode to make it undetected. Fixed will not be public.
+
 # What is AyyTux?
 
 AyyTux is a fork of AimTux, precisely of AimTux-Fuzion. This is my attempt at pasting and adding stuff in.
