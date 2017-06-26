@@ -114,9 +114,6 @@ bool Aimbot::HitChance(const Vector& point, bool teamCheck, C_BasePlayer* localp
 	int hitCount = 0;
 	for (int i = 0; i < Settings::Aimbot::HitChance::hitRays; i++) {
 		Vector dst = point;
-		Autowall::FireBulletData data;
-		data.src = localplayer->GetEyePosition();
-		data.filter.pSkip = localplayer;
 	
 		C_BaseCombatWeapon* activeWeapon = (C_BaseCombatWeapon*) entityList->GetClientEntityFromHandle(localplayer->GetActiveWeapon());
 		if (!activeWeapon)
@@ -127,14 +124,24 @@ bool Aimbot::HitChance(const Vector& point, bool teamCheck, C_BasePlayer* localp
 		float c = (float)M_PI * 2.0f * ((float)(rand() % 1000)/1000.0f);
 		float d = activeWeapon->GetInaccuracy() * ((float)(rand() % 1000)/1000.0f) * 90.0f;
 
-		QAngle angles = Math::CalcAngle(data.src, dst);
-		angles.x += (cos(a) * b) + (cos(c) * d);
-		angles.y += (sin(a) * b) + (sin(c) * d);
-		Math::AngleVectors(angles, data.direction);
+		Vector dir, src, dest;
+    trace_t tr;
+    Ray_t ray;
+    CTraceFilter filter;
+
+    src = localplayer->GetEyePosition();
+    QAngle angles = Math::CalcAngle(src, dst);
+    angles.x += (cos(a) * b) + (cos(c) * d);
+  	angles.y += (sin(a) * b) + (sin(c) * d);
+    Math::AngleVectors(angles, dir);
+    dest = src + (dir * 8192);
+		
+		ray.Init(src, dest);
+    filter.pSkip = localplayer;
+		trace->TraceRay(ray, MASK_SHOT, &filter, &tr);
 	
-		data.direction.NormalizeInPlace();
-	
-		if (Autowall::SimulateFireBullet(activeWeapon, teamCheck, data))
+		C_BasePlayer* player = (C_BasePlayer*) tr.m_pEntityHit;
+    if (player && player->GetClientClass()->m_ClassID == EClassIds::CCSPlayer && player != localplayer && !player->GetDormant() && player->GetAlive() && !player->GetImmune() && (player->GetTeam() != localplayer->GetTeam() || Settings::Aimbot::friendly))	
 			hitCount++;
 	}
 
