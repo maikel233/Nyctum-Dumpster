@@ -127,7 +127,7 @@ bool Aimbot::HitChance(const Vector& point, bool teamCheck, C_BasePlayer* localp
 		Vector dir, src, dest;
     trace_t tr;
     Ray_t ray;
-    CTraceFilter filter;
+    CTraceFilterEntitiesOnly filter;
 
     src = localplayer->GetEyePosition();
     QAngle angles = Math::CalcAngle(src, dst);
