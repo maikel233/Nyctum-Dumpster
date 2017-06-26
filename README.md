@@ -1,5 +1,3 @@
-# Detected
-The cheat is detected and needs some pCode to make it undetected. Fixed will not be public.
 
 # What is AyyTux?
 
