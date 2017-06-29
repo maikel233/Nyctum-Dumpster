@@ -744,17 +744,34 @@ void Aimbot::ShootCheck(C_BaseCombatWeapon* activeWeapon, CUserCmd* cmd)
 		cmd->buttons &= ~IN_ATTACK;
 }
 
-void Aimbot::NoShoot(C_BaseCombatWeapon* activeWeapon, C_BasePlayer* player, CUserCmd* cmd)
+void Aimbot::NoShoot(C_BaseCombatWeapon* activeWeapon, C_BasePlayer* player, C_BasePlayer* localplayer, CUserCmd* cmd)
 {
-	if (player && Settings::Aimbot::NoShoot::enabled)
-	{
-		if (*activeWeapon->GetItemDefinitionIndex() == ItemDefinitionIndex::WEAPON_C4)
-			return;
+	if (Settings::Aimbot::NoShoot::enabled) {
+		CTraceFilterEntitiesOnly filter;
 
-		if (*activeWeapon->GetItemDefinitionIndex() == ItemDefinitionIndex::WEAPON_REVOLVER)
-			cmd->buttons &= ~IN_ATTACK2;
-		else
-			cmd->buttons &= ~IN_ATTACK;
+		Vector src, dir, dest;
+		trace_t tr;
+		Ray_t ray;
+		src = localplayer->GetEyePosition();
+		QAngle angles = cmd->viewangles;
+		Math::AngleVectors(angles, dir);
+		dest = src + (dir * 8192);
+
+		ray.Init(src, dest);
+		filter.pSkip = localplayer;
+		trace->TraceRay(ray, MASK_SHOT, &filter, &tr);
+
+		C_BasePlayer* player = (C_BasePlayer*) tr.m_pEntityHit;
+		if (!player || player->GetClientClass()->m_ClassID != EClassIds::CCSPlayer || player == localplayer || player->GetDormant() || !player->GetAlive() || player->GetImmune() || (player->GetTeam() == localplayer->GetTeam() && !Settings::Aimbot::friendly))
+		{
+			if (*activeWeapon->GetItemDefinitionIndex() == ItemDefinitionIndex::WEAPON_C4)
+				return;
+	
+			if (*activeWeapon->GetItemDefinitionIndex() == ItemDefinitionIndex::WEAPON_REVOLVER)
+				cmd->buttons &= ~IN_ATTACK2;
+			else
+				cmd->buttons &= ~IN_ATTACK;
+		}
 	}
 }
 
@@ -885,7 +902,7 @@ void Aimbot::CreateMove(CUserCmd* cmd)
 	Aimbot::RCS(angle, player, cmd);
 	Aimbot::Smooth(player, angle, cmd);
 	Aimbot::ShootCheck(activeWeapon, cmd);
-	Aimbot::NoShoot(activeWeapon, player, cmd);
+	Aimbot::NoShoot(activeWeapon, player, localplayer, cmd);
 
 	Math::NormalizeAngles(angle);
 	Math::ClampAngles(angle);

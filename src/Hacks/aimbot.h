@@ -27,7 +27,7 @@ namespace Aimbot
 	void AutoShoot(C_BasePlayer* player, int bone, C_BaseCombatWeapon* activeWeapon, CUserCmd* cmd);
 	float AutoWallBestBone(C_BasePlayer *player, int &bestBone);
 	void ShootCheck(C_BaseCombatWeapon* activeWeapon, CUserCmd* cmd);
-	void NoShoot(C_BaseCombatWeapon* activeWeapon, C_BasePlayer* player, CUserCmd* cmd);
+	void NoShoot(C_BaseCombatWeapon* activeWeapon, C_BasePlayer* player, C_BasePlayer* localplayer, CUserCmd* cmd);
 	void AutoCockRevolver( C_BaseCombatWeapon* activeWeapon, C_BasePlayer* localplayer, CUserCmd* cmd);
 
 	void CreateMove(CUserCmd* cmd);
