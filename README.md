@@ -1,7 +1,7 @@
 
 # What is AyyTux?
 
-AyyTux is a fork of AimTux, precisely of AimTux-Fuzion. This is my attempt at pasting and adding stuff in.
+AyyTux is a special place on earth, where all useless stuff we have in nyctum goes, after it's removed. Just know if we add something here, Nyctum does it much better.
 AimTux is a fully featured internal hack for *CounterStrike : Global Offensive* written in C++.
 
 ## Compiling
