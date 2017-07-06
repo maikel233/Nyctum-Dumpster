@@ -1,14 +1,14 @@
 
-# What is AyyTux?
+# What is Nyctum-Dumpster?
 
-AyyTux is a special place on earth, where all useless stuff we have in nyctum goes, after it's removed. Just know if we add something here, Nyctum does it much better.
+Nyctum-Dumpster is a special place on earth, where all useless stuff we have in nyctum goes, after it's removed. Just know if we add something here, Nyctum does it much better.
 AimTux is a fully featured internal hack for *CounterStrike : Global Offensive* written in C++.
 
 ## Compiling
 
 **Note:** _Do NOT download or compile as the root user_
 
-### Download the dependencies required to build AyyTux:
+### Download the dependencies required to build Nyctum-Dumpster:
 
 If you're having problems compiling make sure you've got the latest version of `g++`.
 [How to update g++](https://github.com/AimTuxOfficial/AimTux/wiki/Updating-your-compiler)
@@ -33,7 +33,7 @@ sudo emerge cmake dev-vcs/git gdb libsdl2 mesa lua xdotool
 ```
 ────────────────────────────────────────────────────────────────────────────────
 
-### Download AyyTux:
+### Download Nyctum-Dumpster:
 
 ```bash
 git clone --recursive https://github.com/GreenByteSoftware/AyyTux
@@ -57,7 +57,7 @@ You can later update with
 
 First of all, make sure CSGO is open, it doesn't matter whether you're in game or not.
 
-Navigate to the directory where AyyTux was built if you haven't ready.
+Navigate to the directory where Nyctum-Dumpster was built if you haven't ready.
 
 ```bash
 cd AyyTux
@@ -77,7 +77,7 @@ Now, go back into CSGO, if you're in the main menu of the game you should see th
 
 ## Using the hack
 
-Now that AyyTux has been injected into the game, press <kbd>Insert</kbd> on your keyboard to open the hack menu (<kbd>ALT</kbd>+<kbd>I</kbd> if you're using a laptop).
+Now that Nyctum-Dumpster has been injected into the game, press <kbd>Insert</kbd> on your keyboard to open the hack menu (<kbd>ALT</kbd>+<kbd>I</kbd> if you're using a laptop).
 
 If you want to change skins, create and load configs or open the player list, you can find those buttons at the top of the screen.
 
