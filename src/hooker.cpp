@@ -222,7 +222,9 @@ void Hooker::FindPrediction()
 
 void Hooker::FindIsReadyCallback()
 {
-	uintptr_t func_address = PatternFinder::FindPatternInModule("client_client.so", (unsigned char*) ISREADY_CALLBACK_SIGNATURE, ISREADY_CALLBACK_MASK);
+	uintptr_t func_address = PatternFinder::FindPatternInModule(("client_client.so"),
+		(unsigned char*)("\x48\x83\x3D\x00\x00\x00\x00\x00\x74\x34\x48\x8B\x05"),
+		("xxx????xxxxxx"));
 
 	IsReadyCallback = reinterpret_cast<IsReadyCallbackFn>(func_address);
 }
